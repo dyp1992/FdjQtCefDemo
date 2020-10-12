@@ -19,11 +19,9 @@ void QCefInitSettings(CefSettings & settings)
 
 int QCefInit(int& argc, char** argv)
 {
-   //  qDebug()<<"QCefInit";
     HINSTANCE hInstance = static_cast<HINSTANCE>(GetModuleHandle(nullptr));
 
     CefMainArgs mainArgs(hInstance);
-    //CefRefPtr<SimpleApp> app(new SimpleApp);
     CefRefPtr<SimpleApp> app(new SimpleApp); //CefApp实现，用于处理进程相关的回调。
 
     int exit_code = CefExecuteProcess(mainArgs, app.get(), nullptr);
@@ -36,14 +34,14 @@ int QCefInit(int& argc, char** argv)
 
     CefInitialize(mainArgs, settings, app, nullptr);
 
-    //m_handler = new QCefClientHandler();
-
     return -1;
 }
+
 void CefQuit()
 {
     CefShutdown();
 }
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
