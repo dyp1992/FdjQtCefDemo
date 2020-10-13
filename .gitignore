@@ -51,9 +51,11 @@ compile_commands.json
 # QtCreator local machine specific files for imported projects
 *creator.user*
 
-FdjQtCef/ThirdParty/
 FdjQtCef/bin-debug/
 FdjQtCef/bin-release/
-
+FdjQtCef/ThirdParty/cef/Release/cef_sandbox.lib
+FdjQtCef/ThirdParty/cef/Release/libcef.dll
+FdjQtCef/ThirdParty/cef/Debug/libcef.dll
+FdjQtCef/ThirdParty/cef/Debug/cef_sandbox.lib
 
 

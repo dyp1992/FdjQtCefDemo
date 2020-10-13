@@ -1,0 +1,4 @@
+FdjQtCef/ThirdParty/cef/Release/cef_sandbox.lib filter=lfs diff=lfs merge=lfs -text
+FdjQtCef/ThirdParty/cef/Release/libcef.dll filter=lfs diff=lfs merge=lfs -text
+FdjQtCef/ThirdParty/cef/Debug/libcef.dll filter=lfs diff=lfs merge=lfs -text
+FdjQtCef/ThirdParty/cef/Debug/cef_sandbox.lib filter=lfs diff=lfs merge=lfs -text
