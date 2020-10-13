@@ -1,12 +1,17 @@
 ﻿#include "widget.h"
 #include "ui_widget.h"
+
 #include <QDesktopWidget>
+#include <QDebug>
+
+
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Widget)
 {
     ui->setupUi(this);
     HWND wnd = (HWND)ui->widget->winId();
+    //qDebug()<<"Widget HWND: "<<wnd;
 
     CefWindowInfo cefWndInfo;
     //QString strUrl = "https://www.douyu.com";

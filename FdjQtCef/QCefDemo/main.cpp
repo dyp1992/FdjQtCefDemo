@@ -1,14 +1,20 @@
 ﻿#include "widget.h"
 #include <QApplication>
+#include <QStandardPaths>
+#include <QDebug>
+
 #include "simple_app.h"
 #include "simple_handler.h"
 
+
 void QCefInitSettings(CefSettings & settings)
 {
-   // qDebug()<<"QCefInitSettings";
+    QString appDataPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+    QString cachePath   = QString("%1/%2_cef_cache").arg(appDataPath).arg("DYPCef");
 
-    //std::string cache_path = AppGetWorkingDirectory().toStdString() + "/.cache";//缓存地址
-   // CefString(&settings.cache_path) = CefString(cache_path);
+    std::string cache_path = cachePath.toStdString();//缓存地址
+    qDebug()<<"cache_path:"<<cachePath;
+    CefString(&settings.cache_path) = CefString(cache_path);
     settings.multi_threaded_message_loop = true;//多线程消息循环
     settings.log_severity = LOGSEVERITY_DISABLE;//日志
 
