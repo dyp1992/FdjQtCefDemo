@@ -28,12 +28,16 @@ int QCefInit(int& argc, char** argv)
     HINSTANCE hInstance = static_cast<HINSTANCE>(GetModuleHandle(nullptr));
 
     CefMainArgs mainArgs(hInstance);
-    CefRefPtr<SimpleApp> app(new SimpleApp); //CefApp实现，用于处理进程相关的回调。
 
+    CefRefPtr<SimpleApp> app(new SimpleApp); //CefApp实现，用于处理进程相关的回调。
+//检测是否要启动其它的子进程。此处的CefExecuteProcess是在libcef_dll_wrapper.cc中的，
+//它内部又调用了cef_execute_process方法（libcef_dll.cc），
+//cef_execute_process又调用了libcef/browser/context.cc文件内实现的CefExecuteProcess方法
     int exit_code = CefExecuteProcess(mainArgs, app.get(), nullptr);
     if (exit_code >= 0) {
         return exit_code;
     }
+    //创建Browser进程
 
     CefSettings settings;
     QCefInitSettings(settings);

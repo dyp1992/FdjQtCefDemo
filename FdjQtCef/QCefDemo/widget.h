@@ -25,3 +25,15 @@ public slots:
 };
 
 #endif // WIDGET_H
+
+/*
+ * Browser进程，需要CefApp（SimpleApp实现了这个接口）和CefClient（SimpleHandler实现了这个接口）。
+ * 而Renderer进程只要CefApp。
+ *
+ *CefBrowserProcessHandler和CefRenderProcessHandler两个接口，分别来处理Browser进程和Render进程的个性化的通知
+ *
+ *
+ *示例中的SimpeApp，没有实现CefRenderProcessHandler接口，没有针对Renderer进程做特别处理，
+ * 所以当它作为Render进程时，会缺失一部分功能。比如JS与Native代码交互
+ *
+ */

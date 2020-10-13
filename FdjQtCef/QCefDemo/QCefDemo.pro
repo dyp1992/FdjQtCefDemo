@@ -37,3 +37,5 @@ HEADERS += \
 FORMS += \
     widget.ui
 
+DISTFILES +=
+

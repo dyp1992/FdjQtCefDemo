@@ -30,6 +30,8 @@ Widget::Widget(QWidget *parent) :
     cefWndInfo.SetAsChild(wnd, winRect);  //将cef界面嵌入qt界面中
 
     CefBrowserSettings cefBrowSetting;
+
+    // SimpleHandler implements browser-level callbacks.
     m_browserEvent = CefRefPtr<SimpleHandler>(new SimpleHandler(this));
     bool browser = CefBrowserHost::CreateBrowser(cefWndInfo, m_browserEvent, strUrl.toStdString(), cefBrowSetting, NULL);
     connect(ui->goButton, SIGNAL(clicked()), this, SLOT(onUrl()));
@@ -40,12 +42,11 @@ Widget::~Widget()
 {
     delete ui;
 }
+
 CefRefPtr<CefBrowser> Widget::GetBrowserByID(int nWebBrowserID)
 {
-
     for (auto it = m_browserEvent->GetBrowserList().begin(); it != m_browserEvent->GetBrowserList().end(); it++)
     {
-
         if (nWebBrowserID == it->get()->GetIdentifier())
         {
             return it->get();
@@ -54,6 +55,7 @@ CefRefPtr<CefBrowser> Widget::GetBrowserByID(int nWebBrowserID)
 
     return nullptr;
 }
+
 void Widget::onUrl()
 {
     CefRefPtr<CefBrowser> pBrower = GetBrowserByID(browserId);

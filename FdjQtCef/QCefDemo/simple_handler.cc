@@ -15,22 +15,26 @@ SimpleHandler* g_instance = NULL;
 }  // namespace
 
 SimpleHandler::SimpleHandler(Widget* w)
-    : is_closing_(false) {
+    : is_closing_(false)
+{
   DCHECK(!g_instance);
   g_instance = this;
   this->widget=w;
 }
 
-SimpleHandler::~SimpleHandler() {
+SimpleHandler::~SimpleHandler()
+{
   g_instance = NULL;
 }
 
 // static
-SimpleHandler* SimpleHandler::GetInstance() {
+SimpleHandler* SimpleHandler::GetInstance()
+{
   return g_instance;
 }
 
-void SimpleHandler::OnAfterCreated(CefRefPtr<CefBrowser> browser) {
+void SimpleHandler::OnAfterCreated(CefRefPtr<CefBrowser> browser)
+{
   CEF_REQUIRE_UI_THREAD();
 
   // Add to the list of existing browsers.
@@ -39,7 +43,8 @@ void SimpleHandler::OnAfterCreated(CefRefPtr<CefBrowser> browser) {
   widget->browserId=nID;
 }
 
-bool SimpleHandler::DoClose(CefRefPtr<CefBrowser> browser) {
+bool SimpleHandler::DoClose(CefRefPtr<CefBrowser> browser)
+{
   CEF_REQUIRE_UI_THREAD();
 
   // Closing the main window requires special handling. See the DoClose()
@@ -55,19 +60,23 @@ bool SimpleHandler::DoClose(CefRefPtr<CefBrowser> browser) {
   return false;
 }
 
-void SimpleHandler::OnBeforeClose(CefRefPtr<CefBrowser> browser) {
+void SimpleHandler::OnBeforeClose(CefRefPtr<CefBrowser> browser)
+{
   CEF_REQUIRE_UI_THREAD();
 
   // Remove from the list of existing browsers.
   BrowserList::iterator bit = browser_list_.begin();
-  for (; bit != browser_list_.end(); ++bit) {
-    if ((*bit)->IsSame(browser)) {
+  for (; bit != browser_list_.end(); ++bit)
+  {
+    if ((*bit)->IsSame(browser))
+    {
       browser_list_.erase(bit);
       break;
     }
   }
 
-  if (browser_list_.empty()) {
+  if (browser_list_.empty())
+  {
     // All browser windows have closed. Quit the application message loop.
     CefQuitMessageLoop();
   }
@@ -77,7 +86,8 @@ void SimpleHandler::OnLoadError(CefRefPtr<CefBrowser> browser,
                                 CefRefPtr<CefFrame> frame,
                                 ErrorCode errorCode,
                                 const CefString& errorText,
-                                const CefString& failedUrl) {
+                                const CefString& failedUrl)
+{
   CEF_REQUIRE_UI_THREAD();
 
   // Don't display an error for downloaded files.
@@ -93,11 +103,12 @@ void SimpleHandler::OnLoadError(CefRefPtr<CefBrowser> browser,
   frame->LoadString(ss.str(), failedUrl);
 }
 
-void SimpleHandler::CloseAllBrowsers(bool force_close) {
-  if (!CefCurrentlyOn(TID_UI)) {
+void SimpleHandler::CloseAllBrowsers(bool force_close)
+{
+  if (!CefCurrentlyOn(TID_UI))
+  {
     // Execute on the UI thread.
-    CefPostTask(TID_UI,
-        base::Bind(&SimpleHandler::CloseAllBrowsers, this, force_close));
+    CefPostTask(TID_UI,base::Bind(&SimpleHandler::CloseAllBrowsers, this, force_close));
     return;
   }
 
