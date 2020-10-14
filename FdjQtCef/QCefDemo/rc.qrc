@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>cef_js_integration.html</file>
+    </qresource>
+</RCC>

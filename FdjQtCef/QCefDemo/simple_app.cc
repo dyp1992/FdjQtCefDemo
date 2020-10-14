@@ -7,8 +7,10 @@
 #include "include/cef_command_line.h"
 #include "include/wrapper/cef_helpers.h"
 
+#include <QDebug>
 SimpleApp::SimpleApp()
 {
+    qDebug()<<__func__;
 }
 
 void SimpleApp::OnContextInitialized()

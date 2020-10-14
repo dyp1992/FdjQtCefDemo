@@ -24,12 +24,18 @@ LIBS += shell32.lib \
         gdi32.lib
 
 SOURCES += \
+    client_app_other.cpp \
+    client_app_renderer.cpp \
+    client_v8handler.cpp \
     main.cpp \
     simple_app.cc \
     simple_handler.cc \
     widget.cpp
 
 HEADERS += \
+    client_app_other.h \
+    client_app_renderer.h \
+    client_v8handler.h \
     simple_app.h \
     simple_handler.h \
     widget.h
@@ -38,4 +44,7 @@ FORMS += \
     widget.ui
 
 DISTFILES +=
+
+RESOURCES += \
+    rc.qrc
 

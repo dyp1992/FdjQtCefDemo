@@ -36,4 +36,5 @@ public slots:
  *示例中的SimpeApp，没有实现CefRenderProcessHandler接口，没有针对Renderer进程做特别处理，
  * 所以当它作为Render进程时，会缺失一部分功能。比如JS与Native代码交互
  *
+ * ClientAppBrowser、ClientAppRenderer、ClientAppOther三种CefApp，分别对应Browser、Render及其它类别的三种进程。
  */

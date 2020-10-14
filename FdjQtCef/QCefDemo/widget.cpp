@@ -15,7 +15,8 @@ Widget::Widget(QWidget *parent) :
 
     CefWindowInfo cefWndInfo;
     //QString strUrl = "https://www.douyu.com";
-    QString strUrl ="https://wb2.fudaojun.com/qt6";
+    //QString strUrl ="https://wb2.fudaojun.com/qt6";
+    QString strUrl ="file:///F:/dypCode/FdjQtCefDemo/FdjQtCef/QCefDemo/cef_js_integration.html";
     //QString strUrl = "chrome://version";
 
     RECT winRect;
@@ -33,6 +34,7 @@ Widget::Widget(QWidget *parent) :
 
     // SimpleHandler implements browser-level callbacks.
     m_browserEvent = CefRefPtr<SimpleHandler>(new SimpleHandler(this));
+    //This method can be called on any browser process thread and will not block.
     bool browser = CefBrowserHost::CreateBrowser(cefWndInfo, m_browserEvent, strUrl.toStdString(), cefBrowSetting, NULL);
     connect(ui->goButton, SIGNAL(clicked()), this, SLOT(onUrl()));
     showMaximized();
@@ -58,9 +60,12 @@ CefRefPtr<CefBrowser> Widget::GetBrowserByID(int nWebBrowserID)
 
 void Widget::onUrl()
 {
+    qDebug()<<__FUNCTION__;
     CefRefPtr<CefBrowser> pBrower = GetBrowserByID(browserId);
     if (pBrower)
     {
         pBrower->GetMainFrame()->LoadURL(ui->lineEdit->text().toStdString());
+        //pBrower->GetMainFrame()->LoadURL("file:///F:/dypCode/FdjQtCefDemo/FdjQtCef/QCefDemo/cef_js_integration.html");
+
     }
 }
