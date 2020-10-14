@@ -31,6 +31,8 @@ Widget::Widget(QWidget *parent) :
     cefWndInfo.SetAsChild(wnd, winRect);  //将cef界面嵌入qt界面中
 
     CefBrowserSettings cefBrowSetting;
+    //cefBrowSetting.background_color = 0x000000;
+    cefBrowSetting.background_color = 0x00FF00;
 
     // SimpleHandler implements browser-level callbacks.
     m_browserEvent = CefRefPtr<SimpleHandler>(new SimpleHandler(this));

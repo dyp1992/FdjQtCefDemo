@@ -29,6 +29,14 @@ class SimpleHandler : public CefClient,
     return this;
   }
 
+  // Called when a new message is received from a different process. Return true
+  // if the message was handled or false otherwise. Do not keep a reference to
+  // or attempt to access the message outside of this callback.
+  //Browser进程这边，重写CefClient::OnProcessMessageReceived()这个方法来处理跨进程消息
+  //
+  virtual bool OnProcessMessageReceived(CefRefPtr<CefBrowser> browser,
+                                        CefProcessId source_process,
+                                        CefRefPtr<CefProcessMessage> message) override;
 
   // CefLifeSpanHandler methods:
   virtual void OnAfterCreated(CefRefPtr<CefBrowser> browser) OVERRIDE;

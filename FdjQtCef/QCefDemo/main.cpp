@@ -98,6 +98,7 @@ int main(int argc, char *argv[])
     if (result >= 0) {
         return result;
     }
+    a.setStyleSheet("QWidget{background: yellow;}");
     Widget w;
     w.show();
     a.exec();

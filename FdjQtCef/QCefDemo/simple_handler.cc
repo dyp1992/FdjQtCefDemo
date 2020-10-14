@@ -30,7 +30,13 @@ SimpleHandler::~SimpleHandler()
 // static
 SimpleHandler* SimpleHandler::GetInstance()
 {
-  return g_instance;
+    return g_instance;
+}
+
+bool SimpleHandler::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProcessId source_process,
+                                             CefRefPtr<CefProcessMessage> message)
+{
+    return false;
 }
 
 void SimpleHandler::OnAfterCreated(CefRefPtr<CefBrowser> browser)
